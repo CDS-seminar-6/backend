@@ -7,12 +7,19 @@ import {ProfileUpdateDTO} from "../interfaces/ProfileUpdateDTO";
 import ProfileModifyService from "../services/ProfileModifyService";
 
 const modifyProfileController = async (req: Request, res: Response) => {
+    const query = req.query;
+    const id = query.id as string;
+    const name = req.body.name;
+    const intro_message = req.body.intro_message;
+
     const error = validationResult(req);
     if (!error.isEmpty()) {
         return res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, message.BAD_REQUEST));
     }
 
-    const profileUpdateDTO: ProfileUpdateDTO = req.body;
+    const profileUpdateDTO: ProfileUpdateDTO = new ProfileUpdateDTO(id, name, intro_message)
+
+    console.log("id ", id, "name ", name, "intro", intro_message)
 
     try {
         const data = await ProfileModifyService.changeIntroMessage(profileUpdateDTO);

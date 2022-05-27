@@ -1,4 +1,5 @@
 import {ProfileUpdateDTO} from "../interfaces/ProfileUpdateDTO";
+import { ProfileResponseDTO } from "../interfaces/ProfileResponseDTO";
 import Profile from "../models/Profile";
 
 const changeIntroMessage = async (dto: ProfileUpdateDTO) => {
@@ -14,7 +15,8 @@ const changeIntroMessage = async (dto: ProfileUpdateDTO) => {
             return null;
         }
         await Profile.findOneAndUpdate(filter, update);
-        return await Profile.findOne(filter);
+        const data = await Profile.findOne(filter);
+        return new ProfileResponseDTO(data!.id_nickname, data!.name, data!.intro_message)
     } catch (error) {
         console.log(error);
         throw error;
