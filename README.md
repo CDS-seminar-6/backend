@@ -1,2 +1,7 @@
-# node-typescript-init
-node.js, typescript, mongoDB(mongoose) boiler-plate
+# 합동 세미나 과제 제출: 박진형
+## 배포 주소
+* 배포 주소: [54.180.27.106:8003](54.180.27.106:8003)
+
+## API 명세
+* [GET] /api/profile/{id}
+* [POST] /api/profile/{id}
